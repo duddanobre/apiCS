@@ -11,7 +11,7 @@ namespace Pedidos.API.Persistence.Repositories{
 
         }
 
-        public async Task<List<Pedido>> ListAsync(){
+        public async Task<IEnumerable<Pedido>> ListAsync(){
             return await dbContext.Pedidos.ToListAsync();
         }
 

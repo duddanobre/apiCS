@@ -19,7 +19,7 @@ namespace Pedidos.API.Controllers{
         }
 
         [HttpGet]
-        public async Task<List<Pedido>> GetAllAsync( ){
+        public async Task<IEnumerable<Pedido>> GetAllAsync( ){
 
             var encomendas = await service.ListAsync();
 

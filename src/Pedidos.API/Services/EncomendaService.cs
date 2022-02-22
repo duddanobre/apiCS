@@ -12,7 +12,7 @@ namespace Pedidos.API.Services{
         public EncomendaService(IEncomendaRepository encomendaRepository){
             repository = encomendaRepository;
         }
-        public async Task<List<Pedido>> ListAsync(){
+        public async Task<IEnumerable<Pedido>> ListAsync(){
               
           return await repository.ListAsync();    
         }

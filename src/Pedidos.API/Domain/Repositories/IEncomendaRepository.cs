@@ -4,7 +4,7 @@ using Pedidos.API.Domain.Models;
 
 namespace Pedidos.API.Domain.Repositories{
     public interface IEncomendaRepository{
-        Task<List<Pedido>> ListAsync();
+        Task<IEnumerable<Pedido>> ListAsync();
 
         Task<Pedido> FindByDateAsync(System.DateTime date);
     }

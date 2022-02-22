@@ -4,6 +4,6 @@ using Pedidos.API.Domain.Models;
 
 namespace Pedidos.API.Domain.Services{
     public interface IEncomendaService{
-        Task<List<Pedido>> ListAsync();
+        Task<IEnumerable<Pedido>> ListAsync();
     }
 }

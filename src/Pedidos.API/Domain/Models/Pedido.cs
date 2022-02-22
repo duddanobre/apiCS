@@ -10,11 +10,8 @@ namespace Pedidos.API.Domain.Models{
 
         public string Endereco{get; set;}
 
-        public List<Product> Produtos {get; set;} = new List<Product>();
+        public List<Product> Produtos {get;} = new List<Product>();
 
-        public Pedido(){
-            
-        }
 
     }
 }

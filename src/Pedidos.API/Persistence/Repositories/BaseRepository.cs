@@ -9,6 +9,8 @@ namespace Pedidos.API.Persistence.Repositories{
         public BaseRepository(AppDbContext context){
             dbContext = context;
         }
+
+        
     }
 
 }

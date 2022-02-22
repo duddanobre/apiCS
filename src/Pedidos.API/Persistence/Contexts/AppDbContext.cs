@@ -15,7 +15,20 @@ namespace Pedidos.API.Persistence.Contexts{
         protected override void OnModelCreating(ModelBuilder builder){
             base.OnModelCreating(builder);
 
-            builder.Entity<Product> ().ToTable("Produtos");
+            builder.Entity<Pedido> ().ToTable("Pedidos");
+            builder.Entity<Pedido> ().HasKey(p => p.Id);
+            builder.Entity<Pedido> ().Property(p => p.Id).IsRequired ().ValueGeneratedOnAdd();
+            builder.Entity<Pedido> ().Property(p => p.Endereco).IsRequired ().HasMaxLength(100);
+            builder.Entity<Pedido> ().HasMany(p => p.Produtos).WithOne(p => p.Pedido).HasForeignKey (p => p.IdPedido);
+
+            builder.Entity<Pedido> ().HasData(
+                new Pedido {Id = 101, Data_create = new System.DateTime(2022, 02, 15), Data_entrega = new System.DateTime(2022, 03, 01), Endereco = "Rua das Laranjas",
+                },
+                new Pedido {Id = 102, Data_create = new System.DateTime(2022, 02, 16), Data_entrega = new System.DateTime(2022, 03, 05), Endereco = "Rua das Oliveiras, Fortaleza, Aldeota",
+                }
+            );
+
+            builder.Entity<Product> ().ToTable("Products");
             builder.Entity<Product> ().HasKey(p => p.ProdutoId);
             builder.Entity<Product> ().Property(p => p.ProdutoId).IsRequired ().ValueGeneratedOnAdd();
             builder.Entity<Product> ().Property(p => p.Nome).IsRequired ().HasMaxLength(30);
@@ -24,20 +37,8 @@ namespace Pedidos.API.Persistence.Contexts{
             builder.Entity<Product> ().HasOne(p => p.Pedido).WithMany(p => p.Produtos).HasForeignKey (p => p.IdPedido);
             
             builder.Entity<Product> ().HasData(
-                new Product {ProdutoId =2, Nome = "Skate", Descricao  = "Skate preto oficial Justin Bieber", IdPedido = 001, Valor = 55}
-            );
-
-            builder.Entity<Pedido> ().ToTable("Pedidos");
-            builder.Entity<Pedido> ().HasKey(p => p.Id);
-            builder.Entity<Pedido> ().Property(p => p.Id).IsRequired ().ValueGeneratedOnAdd();
-            builder.Entity<Pedido> ().Property(p => p.Endereco).IsRequired ().HasMaxLength(100);
-            builder.Entity<Pedido> ().HasMany(p => p.Produtos).WithOne(p => p.Pedido).HasForeignKey (p => p.IdPedido);
-
-            builder.Entity<Pedido> ().HasData(
-                new Pedido {Id = 001, Data_create = new System.DateTime(2022, 02, 15), Data_entrega = new System.DateTime(2022, 03, 01), Endereco = "Rua das Laranjas",
-                },
-                new Pedido {Id = 002, Data_create = new System.DateTime(2022, 02, 16), Data_entrega = new System.DateTime(2022, 03, 05), Endereco = "Rua das Oliveiras, Fortaleza, Aldeota",
-                }
+                new Product {IdPedido=101, ProdutoId =2, Nome = "Skate", Descricao  = "Skate preto oficial Justin Bieber", Valor = 55},
+                new Product {IdPedido=101, ProdutoId =3, Nome = "Carrinho", Descricao  = "Marvel Collections", Valor = 30}
             );
         
         }
